@@ -88,31 +88,33 @@ const options = {
         startCounterBtn.disabled = false; 
 
         //слухач на кнопку
-        startCounterBtn.addEventListener('click',() => {
-            setInterval( () => {
-
-                let currentDate = new Date();
-
-                // визначення та запис у змінну часу відліку у мс
-                ms = selectedDates[0] - currentDate;  
-    
-                    console.log('time to count, ms =', ms);
-
-                convertMs(ms);
-                    
-                    //console.log({ days, hours, minutes, seconds });
-            
-                counterDays.textContent = days;
-                counterHours.textContent = hours;
-                counterMinutes.textContent = minutes;
-                counterSeconds.textContent = seconds;
-            
-            }, 1000);
-        })
+        startCounterBtn.addEventListener('click', onClick);
     }
 }
 
 const dataPickr = new flatpickr(selectedDates, options);
+
+function onClick () {
+    setInterval( () => {
+
+        let currentDate = new Date();
+
+        // визначення та запис у змінну часу відліку у мс
+        ms = dataPickr.selectedDates[0] - currentDate;  
+
+            console.log('time to count, ms =', ms);
+
+        timeForCounter = convertMs(ms);
+            
+            console.log("It's timeForCounter inside setInterval :", timeForCounter);
+    
+        counterDays.textContent = timeForCounter.days;
+        counterHours.textContent = timeForCounter.hours;
+        counterMinutes.textContent = timeForCounter.minutes;
+        counterSeconds.textContent = timeForCounter.seconds;
+    
+    }, 1000);
+}
 
 // Для підрахунку значень використовуй готову функцію convertMs, де ms - різниця між кінцевою і поточною датою в мілісекундах.
 function convertMs(ms) {
@@ -132,9 +134,7 @@ function convertMs(ms) {
     // Remaining seconds
     const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   
-    //timeForCounter =  { days, hours, minutes, seconds };
-    console.log( { days, hours, minutes, seconds } );
-
+    console.log("It's inside setInterval :", { days, hours, minutes, seconds } );
 
     return { days, hours, minutes, seconds };
   }

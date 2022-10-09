@@ -63,7 +63,7 @@ const counterSeconds = document.querySelector('[data-seconds]');
 
 let ms; // змінна для запису часу відліку у мс
 
-let timeForCounter = {};
+const timeForCounter = {};
 
 const options = {
     enableTime: true,
@@ -72,7 +72,7 @@ const options = {
     minuteIncrement: 1,
     onClose(selectedDates) {
       
-        const currentDate = new Date(); 
+        let currentDate = new Date(); 
 
         //перевірка дати на валідність (майбутнє):
         if (selectedDates[0] < currentDate ) {
@@ -87,26 +87,25 @@ const options = {
         // активація кнопки
         startCounterBtn.disabled = false; 
 
-        
-
         //слухач на кнопку
         startCounterBtn.addEventListener('click',() => {
-
             setInterval( () => {
+
+                let currentDate = new Date();
 
                 // визначення та запис у змінну часу відліку у мс
                 ms = selectedDates[0] - currentDate;  
     
-                console.log('time to count, ms =', ms);
+                    console.log('time to count, ms =', ms);
 
                 convertMs(ms);
                     
-                console.log({ days, hours, minutes, seconds });
+                    //console.log({ days, hours, minutes, seconds });
             
-                counterDays.textcontent = days;
+                counterDays.value = days;
                 counterHouers.textcontent = hours;
                 counterMinutes.textcontent = minutes;
-                counterSeconds.textcontent = seconds;
+                counterSeconds.value = seconds;
             
             }, 1000);
         })
@@ -115,10 +114,9 @@ const options = {
 
 const dataPickr = new flatpickr(selectedDates, options);
 
-
-
 // Для підрахунку значень використовуй готову функцію convertMs, де ms - різниця між кінцевою і поточною датою в мілісекундах.
 function convertMs(ms) {
+
     // Number of milliseconds per unit of time
     const second = 1000;
     const minute = second * 60;
@@ -134,12 +132,14 @@ function convertMs(ms) {
     // Remaining seconds
     const seconds = Math.floor((((ms % day) % hour) % minute) / second);
   
-    console.log({ days, hours, minutes, seconds } );
+    //timeForCounter =  { days, hours, minutes, seconds };
+    console.log( { days, hours, minutes, seconds } );
+
     return { days, hours, minutes, seconds };
   }
   
-
-//   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
-//   console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
-//   console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
-
+/*
+  console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+  console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
+  console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+*/

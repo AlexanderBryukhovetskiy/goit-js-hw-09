@@ -57,7 +57,7 @@ const startCounterBtn  = document.querySelector('[data-start]');
 startCounterBtn.disabled = true;
 
 const counterDays = document.querySelector('[data-days]');
-const counterHouers = document.querySelector('[data-hours]');
+const counterHours = document.querySelector('[data-hours]');
 const counterMinutes = document.querySelector('[data-minutes]');
 const counterSeconds = document.querySelector('[data-seconds]');
 
@@ -102,10 +102,10 @@ const options = {
                     
                     //console.log({ days, hours, minutes, seconds });
             
-                counterDays.value = days;
-                counterHouers.textcontent = hours;
-                counterMinutes.textcontent = minutes;
-                counterSeconds.value = seconds;
+                counterDays.textContent = days;
+                counterHours.textContent = hours;
+                counterMinutes.textContent = minutes;
+                counterSeconds.textContent = seconds;
             
             }, 1000);
         })
@@ -134,6 +134,7 @@ function convertMs(ms) {
   
     //timeForCounter =  { days, hours, minutes, seconds };
     console.log( { days, hours, minutes, seconds } );
+
 
     return { days, hours, minutes, seconds };
   }

@@ -108,7 +108,16 @@ function onClick () {
 
             
         console.log("It's timeForCounter inside setInterval :", timeForCounter);
-    
+
+        /*
+        //так працює:
+        counterDays.textContent = timeForCounter.days;
+        counterHours.textContent = timeForCounter.hours;
+        counterMinutes.textContent = timeForCounter.minutes;
+        counterSeconds.textContent = timeForCounter.seconds;
+        */
+
+        // так не працює:
         counterDays.textContent = addLeadingZero(timeForCounter.days,  0);
         counterHours.textContent = addLeadingZero(timeForCounter.hours, 0);
         counterMinutes.textContent = addLeadingZero(timeForCounter.minutes, 0);

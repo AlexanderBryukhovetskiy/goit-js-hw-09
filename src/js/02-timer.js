@@ -49,6 +49,8 @@ import flatpickr from "flatpickr";
 // Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css"; 
 
+import Notiflix from "notiflix";
+
 const selectedDates = document.querySelector('input#datetime-picker');
 
 const startCounterBtn  = document.querySelector('[data-start]');
@@ -75,7 +77,8 @@ const options = {
         //перевірка дати на валідність (майбутнє):
         if (selectedDates[0] < currentDate ) {
             startCounterBtn.disabled = true;
-            alert("Please choose a date in the future");
+            //alert("Please choose a date in the future");
+            Notiflix.Report.failure('Wrong date!', 'Please choose a date in the future', 'Ok');
             return;
         } 
 

@@ -29,7 +29,7 @@ img {
 .field {
   padding: 0;
   margin: 0;
-  width: 45px;
+  min-width: 45px;
   display: flex;
   justify-content: center;
   align-items: center;

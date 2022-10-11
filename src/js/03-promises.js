@@ -17,7 +17,7 @@ let object = {position, delay};
 
 function createPromise(position, delay) {
 
-     // setTimeout ( () => {
+      setTimeout ( () => {
         const shouldResolve = Math.random() > 0.3;
 
         object.position = position;
@@ -34,7 +34,7 @@ function createPromise(position, delay) {
           }
         })
 
-    //}, delay);
+    }, delay);
 }
 
 
@@ -57,7 +57,7 @@ function onClick () {
     delay += step;
   }
 
-  
+
 }
 
 

@@ -77,8 +77,20 @@ const options = {
         //перевірка дати на валідність (майбутнє):
         if (selectedDates[0] < currentDate ) {
             startCounterBtn.disabled = true;
+
+            clearInterval(timerId);
+            counterDays.textContent = "00";
+            counterHours.textContent = "00";
+            counterMinutes.textContent = "00";
+            counterSeconds.textContent = "00";
+
             //alert("Please choose a date in the future");
             Notiflix.Report.failure('Wrong date!', 'Please choose a date in the future', 'Ok');
+
+            setTimeout ( () => {
+                document.location.reload();
+            }, 5000);
+
             return;
         } 
 
@@ -104,40 +116,29 @@ function onClick () {
         // визначення та запис у змінну часу відліку у мс
         ms = dataPickr.selectedDates[0] - currentDate;  
        
-
             console.log('time to count, ms =', ms);
 
         const timeForCounter = convertMs(ms);
 
-            
-        console.log("It's timeForCounter inside setInterval :", timeForCounter);
+            console.log("It's timeForCounter inside setInterval :", timeForCounter);
 
-        
-        //так працює:
-        counterDays.textContent = timeForCounter.days.toString().padStart(2,  0);
-        counterHours.textContent = timeForCounter.hours.toString().padStart(2, 0);
-        counterMinutes.textContent = timeForCounter.minutes.toString().padStart(2, 0);
-        counterSeconds.textContent = timeForCounter.seconds.toString().padStart(2, 0);
-        
-
-        // так не працює:
-        /*
         counterDays.textContent = addLeadingZero(timeForCounter.days,  0);
         counterHours.textContent = addLeadingZero(timeForCounter.hours, 0);
         counterMinutes.textContent = addLeadingZero(timeForCounter.minutes, 0);
         counterSeconds.textContent = addLeadingZero(timeForCounter.seconds, 0);
 
-        console.log (addLeadingZero(timeForCounter.days,  0));
-       */
+        startCounterBtn.disabled = true;
+
         if (timeForCounter.days === 0 && timeForCounter.hours === 0 
             && timeForCounter.minutes === 0 && timeForCounter.seconds === 0) {
-           
+         
            clearInterval(timerId);
-           startCounterBtn.disabled = true;
-        }
-        
-    }, 1000);
 
+           setTimeout ( () => {
+                document.location.reload();
+           }, 10000);
+        }
+    }, 1000);
 }
 
 // Для підрахунку значень використовуй готову функцію convertMs, де ms - різниця між кінцевою і поточною датою в мілісекундах.
@@ -164,12 +165,8 @@ function convertMs(ms) {
   }
   
 function addLeadingZero(value, addingSymbols) {
-    value = value.toString().padStart(2, addingSymbols)
+    return value.toString().padStart(2, addingSymbols)
 }
-
-
-
-
 
 /*
   console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}

@@ -89,7 +89,7 @@ const options = {
 
             setTimeout ( () => {
                 document.location.reload();
-            }, 5000);
+            }, 4000);
 
             return;
         } 
